@@ -155,7 +155,7 @@ class Account:
         self.is_frozen = False
         return f"Account for {self.owner} has been closed. All balances reset."
 
-if __name__ == "__main__":
+
     acc1 = Account("Jeremy", 1000)
     acc2 = Account("Barbara", 500)
 
