@@ -13,7 +13,6 @@ class Account:
 
 # Deposit: method to deposit funds, store the deposit and return a message with the new balance to the customer. It should only accept positive amounts.
     def deposit(self, amount):
-        """Deposit funds if account is not frozen and amount is positive."""
         if self.is_frozen:
             return "Account is frozen. Cannot deposit funds."
         if amount <= 0:
@@ -23,8 +22,7 @@ class Account:
 
 
 # Withdraw: method to withdraw funds, store the withdrawal and return a message with the new balance to the customer. An account cannot be overdrawn.
-    def withdraw(self, amount):
-        """Withdraw funds if account is not frozen, amount is positive, and balance after withdrawal respects min balance."""
+    def withdraw(self, amount):     
         if self.is_frozen:
             return "Account is frozen. Cannot withdraw funds."
         if amount <= 0:
@@ -38,8 +36,7 @@ class Account:
         return f"Withdrawal successful. New balance: {self.get_balance()}"
 
 # Transfer Funds: Method to transfer funds from one account to an instance of another account.
-    def transfer_funds(self, amount, target_account):
-        """Transfer funds to another Account instance."""
+    def transfer_funds(self, amount, target_account): 
         if self.is_frozen:
             return "Account is frozen. Cannot transfer funds."
         if not isinstance(target_account, Account):
@@ -58,8 +55,7 @@ class Account:
                 f"Transferred {amount:.2f} to {target_account.owner}.")
 
  # Get Balance: Method to calculate an account balance from deposits and withdrawals.               
-    def get_balance(self):
-        """Calculate balance from deposits, withdrawals, and loan."""
+    def get_balance(self):     
         total_deposits = sum(self.deposits)
         total_withdrawals = sum(self.withdrawals)
         return total_deposits - total_withdrawals - self.loan
@@ -67,7 +63,6 @@ class Account:
 
 # Request Loan: Method to request a loan amount.
     def request_loan(self, amount):
-        """Request a loan amount."""
         if amount <= 0:
             return "Loan amount must be positive."
 
@@ -76,8 +71,7 @@ class Account:
 
 
 # Repay Loan: Method to repay a loan with a given amount.
-    def repay_loan(self, amount):
-        """Repay a loan with a given amount."""
+    def repay_loan(self, amount): 
         if amount <= 0:
             return "Repayment amount must be positive."
         if amount > self.loan:
@@ -90,12 +84,10 @@ class Account:
 
 # View Account Details: Method to display the account owner's details and current balance.
     def view_account_details(self):
-        """Display account owner and current balance."""
         return f"Account Owner: {self.owner}\nCurrent Balance: {self.get_balance()}"
 
 # Change Account Owner: Method to update the account owner's name.
     def change_account_owner(self, new_owner):
-        """Update the account owner's name."""
         if not new_owner:
             return "New owner name cannot be empty."
         self.owner = new_owner
@@ -103,7 +95,7 @@ class Account:
 
 # Account Statement: Method to generate a statement of all transactions in an account. (Print using a for loop).
     def account_statement(self):
-        """Generate a statement of all transactions."""
+
         print(f"Account Statement for {self.owner}:")
         print("Deposits:")
         for i, amount in enumerate(self.deposits, 1):
@@ -117,7 +109,6 @@ class Account:
 
 # Interest Calculation: Method to calculate and apply an interest to the balance. Use 5% interest. 
     def calculate_interest(self):
-        """Calculate and apply 5% interest to the balance."""
         if self.is_frozen:
             return "Account is frozen. Cannot apply interest."
         interest = self.get_balance() * 0.05
@@ -129,25 +120,21 @@ class Account:
 
 # Freeze/Unfreeze Account: Methods to freeze and unfreeze the account for security reasons.
     def freeze_account(self):
-        """Freeze the account."""
         self.is_frozen = True
         return "Account has been frozen."
 
     def unfreeze_account(self):
-        """Unfreeze the account."""
         self.is_frozen = False
         return "Account has been unfrozen."
 
 # Set Minimum Balance: Method to enforce a minimum balance requirement. You cannot withdraw if your balance is less than this amount.Close Account: Method to close the account and set all balances to zero and empty all transactions.
     def set_minimum_balance(self, amount):
-        """Set minimum balance requirement."""
         if amount < 0:
             return "Minimum balance cannot be negative."
         self.min_balance = amount
         return f"Minimum balance set to {self.min_balance}."
 
     def close_account(self):
-        """Close account by resetting balances and transactions."""
         self.deposits.clear()
         self.withdrawals.clear()
         self.loan = 0
