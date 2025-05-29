@@ -107,11 +107,11 @@ class Account:
         print(f"Account Statement for {self.owner}:")
         print("Deposits:")
         for i, amount in enumerate(self.deposits, 1):
-            print(f"  {i}. +{amount:.2f}")
+            print(f"  {i}. +{amount}")
         print("Withdrawals:")
         for i, amount in enumerate(self.withdrawals, 1):
-            print(f"  {i}. -{amount:.2f}")
-        print(f"Loan Balance: {self.loan:.2f}")
+            print(f"  {i}. -{amount}")
+        print(f"Loan Balance: {self.loan}")
         print(f"Current Balance: {self.get_balance()}")
 
 
