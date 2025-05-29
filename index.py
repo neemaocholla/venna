@@ -19,7 +19,7 @@ class Account:
         if amount <= 0:
             return "Deposit amount must be positive."
         self.deposits.append(amount)
-        return f"Deposit successful. New balance: {self.get_balance():.2f}"
+        return f"Deposit successful. New balance: {self.get_balance()}"
 
 
 # Withdraw: method to withdraw funds, store the withdrawal and return a message with the new balance to the customer. An account cannot be overdrawn.
@@ -31,11 +31,11 @@ class Account:
             return "Withdrawal amount must be positive."
         current_balance = self.get_balance()
         if current_balance - amount < self.min_balance:
-            return f"Cannot withdraw. Balance cannot go below minimum balance of {self.min_balance:.2f}."
+            return f"Cannot withdraw. Balance cannot go below minimum balance of {self.min_balance}."
         if amount > current_balance:
             return "Insufficient funds. Cannot overdraw account."
         self.withdrawals.append(amount)
-        return f"Withdrawal successful. New balance: {self.get_balance():.2f}"
+        return f"Withdrawal successful. New balance: {self.get_balance()}"
 
 # Transfer Funds: Method to transfer funds from one account to an instance of another account.
     def transfer_funds(self, amount, target_account):
@@ -47,14 +47,14 @@ class Account:
         if amount <= 0:
             return "Transfer amount must be positive."
         if self.get_balance() - amount < self.min_balance:
-            return f"Cannot transfer. Balance cannot go below minimum balance of {self.min_balance:.2f}."
+            return f"Cannot transfer. Balance cannot go below minimum balance of {self.min_balance}."
         if amount > self.get_balance():
             return "Insufficient funds to transfer."
       
         self.withdrawals.append(amount)
 
         target_account.deposits.append(amount)
-        return (f"Transfer successful. New balance: {self.get_balance():.2f} "
+        return (f"Transfer successful. New balance: {self.get_balance} "
                 f"Transferred {amount:.2f} to {target_account.owner}.")
 
  # Get Balance: Method to calculate an account balance from deposits and withdrawals.               
@@ -72,7 +72,7 @@ class Account:
             return "Loan amount must be positive."
 
         self.loan += amount
-        return f"Loan approved for {amount:.2f}. Total loan balance: {self.loan:.2f}"
+        return f"Loan approved for {amount}. Total loan balance: {self.loan}"
 
 
 # Repay Loan: Method to repay a loan with a given amount.
@@ -81,17 +81,17 @@ class Account:
         if amount <= 0:
             return "Repayment amount must be positive."
         if amount > self.loan:
-            return f"Repayment amount exceeds loan balance of {self.loan:.2f}."
+            return f"Repayment amount exceeds loan balance of {self.loan}."
         if amount > self.get_balance():
             return "Insufficient funds to repay loan."
         self.withdrawals.append(amount)
         self.loan -= amount
-        return f"Loan repayment successful. Remaining loan balance: {self.loan:.2f}"
+        return f"Loan repayment successful. Remaining loan balance: {self.loan}"
 
 # View Account Details: Method to display the account owner's details and current balance.
     def view_account_details(self):
         """Display account owner and current balance."""
-        return f"Account Owner: {self.owner}\nCurrent Balance: {self.get_balance():.2f}"
+        return f"Account Owner: {self.owner}\nCurrent Balance: {self.get_balance()}"
 
 # Change Account Owner: Method to update the account owner's name.
     def change_account_owner(self, new_owner):
@@ -112,7 +112,7 @@ class Account:
         for i, amount in enumerate(self.withdrawals, 1):
             print(f"  {i}. -{amount:.2f}")
         print(f"Loan Balance: {self.loan:.2f}")
-        print(f"Current Balance: {self.get_balance():.2f}")
+        print(f"Current Balance: {self.get_balance()}")
 
 
 # Interest Calculation: Method to calculate and apply an interest to the balance. Use 5% interest. 
@@ -124,7 +124,7 @@ class Account:
         if interest <= 0:
             return "No interest applied due to non-positive balance."
         self.deposits.append(interest)
-        return f"Interest of {interest:.2f} applied. New balance: {self.get_balance():.2f}"
+        return f"Interest of {interest:.2f} applied. New balance: {self.get_balance()}"
 
 
 # Freeze/Unfreeze Account: Methods to freeze and unfreeze the account for security reasons.
@@ -144,7 +144,7 @@ class Account:
         if amount < 0:
             return "Minimum balance cannot be negative."
         self.min_balance = amount
-        return f"Minimum balance set to {self.min_balance:.2f}."
+        return f"Minimum balance set to {self.min_balance}."
 
     def close_account(self):
         """Close account by resetting balances and transactions."""
